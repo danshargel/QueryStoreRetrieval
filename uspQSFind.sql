@@ -9,7 +9,7 @@ GO
 
 
 
-CREATE OR ALTER     PROCEDURE [temp].[uspQSFind]
+CREATE OR ALTER     PROCEDURE [dbo].[uspQSFind]
     @vcDBName VARCHAR(100),
     @vcUSPName VARCHAR(100),
     @vcUSPSchema VARCHAR(100) = 'dbo',
