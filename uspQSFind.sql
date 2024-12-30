@@ -8,7 +8,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE OR ALTER   PROCEDURE [dbo].[uspQSFind]
+
+CREATE OR ALTER     PROCEDURE [temp].[uspQSFind]
     @vcDBName VARCHAR(100),
     @vcUSPName VARCHAR(100),
     @vcUSPSchema VARCHAR(100) = 'dbo',
@@ -60,6 +61,7 @@ SELECT TOP 1000 t.query_sql_text,
        sch.name + ''.'' + usp.name AS parent_object,
 	   --usp.name AS parent_object,
        query_plan,
+	   CAST(CAST(query_plan as nvarchar(max)) AS xml) as query_planXML,
        count_executions,
        ROUND(avg_duration / 1000, 2) AS avg_durationms,
        last_duration / 1000 AS last_durationms,
@@ -148,5 +150,8 @@ IF @bOutputQry = 1
 
 EXEC (@vcSQL);
 GO
+
+
+
 
 
