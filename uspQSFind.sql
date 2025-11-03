@@ -1,6 +1,7 @@
 USE [DBAdmin]
 GO
 
+
 SET ANSI_NULLS ON
 GO
 
@@ -9,7 +10,8 @@ GO
 
 
 
-CREATE OR ALTER     PROCEDURE [dbo].[uspQSFind]
+
+CREATE OR ALTER           PROCEDURE [dbo].[uspQSFind]
     @vcDBName VARCHAR(100),
     @vcUSPName VARCHAR(100),
     @vcUSPSchema VARCHAR(100) = 'dbo',
@@ -96,7 +98,7 @@ SELECT TOP 1000 t.query_sql_text,
     ON q.query_id      = p.query_id
   JOIN ' + @vcDBName + '.sys.query_store_runtime_stats s
     ON p.plan_id       = s.plan_id
-  JOIN ' + @vcDBName + '.sys.procedures usp
+  JOIN ' + @vcDBName + '.sys.objects usp
    ON q.object_id = usp.object_id
   JOIN ' + @vcDBName + '.sys.schemas sch
    ON usp.schema_id = sch.schema_id
@@ -150,8 +152,5 @@ IF @bOutputQry = 1
 
 EXEC (@vcSQL);
 GO
-
-
-
 
 
